@@ -5,15 +5,16 @@ const UserService = {
   getUsers: async () => {
     return await UserModel.getAllUsers();
   },
-  createUser: async (name, email) => {
-    return await UserModel.createUser(name, email);
+  createUser: async (name) => {
+    return await UserModel.createUser(name);
   },
   getUserPreferences: async (userId) => {
     return await UserPreferencesModel.getUserPreferences(userId);
   },
-  createUserPreference: async (userId, languageCode, preferredCommunication) => {
-    return await UserPreferencesModel.createUserPreference(userId, languageCode, preferredCommunication);
-  }
+  createUserPreference: async (userId, languageCode) => {
+    return await UserPreferencesModel.createUserPreference(userId, languageCode);
+  },
+  removeUser: async userId => await UserPreferencesModel.removeUser(userId)
 };
 
 module.exports = UserService;

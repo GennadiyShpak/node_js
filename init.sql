@@ -1,17 +1,20 @@
 CREATE TABLE IF NOT EXISTS Users (
     ID SERIAL PRIMARY KEY,
-    Name VARCHAR(100),
-    Email VARCHAR(100)
+    Name VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS UserPreferences (
     PreferenceID SERIAL PRIMARY KEY,
     LanguageCode VARCHAR(100),
-    PreferredCommunication INT,
     UserId INT,
-    FOREIGN KEY (UserId) REFERENCES Users(ID)
+    FOREIGN KEY (UserId) REFERENCES Users(ID) ON DELETE CASCADE
 );
 
+INSERT INTO Users VALUES (1, 'some_name');
+
+INSERT INTO UserPreferences VALUES (1, 'Javascript', '1');
+
+-- DELETE FROM Users WHERE ID = 1;
 
 
 -- ALTER TABLE users ADD UNIQUE (name)

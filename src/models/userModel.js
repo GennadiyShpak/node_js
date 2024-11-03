@@ -5,10 +5,10 @@ const UserModel = {
     const result = await pool.query("SELECT * FROM Users");
     return result.rows;
   },
-  createUser: async (name, email) => {
+  createUser: async (name) => {
     const result = await pool.query(
-      "INSERT INTO users (Name, Email) VALUES ($1, $2)",
-      [name, email],
+      "INSERT INTO users (Name) VALUES ($1)",
+      [name],
     );
     return result.rows[0];
   },
