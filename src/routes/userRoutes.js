@@ -13,9 +13,9 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { name, email } = req.body;
+  const { name } = req.body;
   try {
-    const newUser = await UserService.createUser(name, email);
+    const newUser = await UserService.createUser(name);
     res.json(newUser);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -34,10 +34,20 @@ router.get('/:userId/preferences', async (req, res) => {
 
 router.post('/:userId/preferences', async (req, res) => {
   const { userId } = req.params;
-  const { languageCode, preferredCommunication } = req.body;
+  const { languageCode } = req.body;
   try {
-    const newPreference = await UserService.createUserPreference(userId, languageCode, preferredCommunication);
+    const newPreference = await UserService.createUserPreference(userId, languageCode);
     res.json(newPreference);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.delete('/:userId', async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const removedUser = await UserService.removeUser(userId);
+    res.json(removedUser);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
